@@ -53,12 +53,15 @@
     $taxonomies_objects = get_taxonomies(array(), 'objects');   
 
     foreach($taxonomies_objects as $taxonomy)
-        if(in_array(gpost('type','post'), $taxonomy->object_type))
+        if(in_array(gpost('type','post'), $taxonomy->object_type)){
+            $value = gpost('taxonomies', array());
+            $value = isset($value[$taxonomy->name])?$value[$taxonomy->name]:'';
             $taxonomies[$taxonomy->name] = array(
                 'name' => $taxonomy->name,
                 'label' => $taxonomy->label,
-                'value' => isset(gpost('taxonomies')[$taxonomy->name])?gpost('taxonomies')[$taxonomy->name]:''
+                'value' => $value
             );
+        }
 
     // post mapping
 
