@@ -1,14 +1,14 @@
-=== Best Import ===
+=== Best Import Pro ===
 Contributors: zefir-studio
 Donate link: http://zefirstudio.pl/wp-best-import/
 Tags: import, importing, importer, migrate, migrating, xml, csv, zip, wordpress xml import, wordpress csv import, xml, csv, import, migrate, import xml to wordpress, import csv to wordpress, advanced xml import, advanced csv import, bulk csv import, bulk xml import, bulk data import, xml to custom post type, csv to custom post type, woocommerce csv import, woocommerce xml import, real este import xml, csv import, import csv, xml import, import xml, csv importer
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Import data from XML, CSV and ZIP files as easy and fast as never before.
+Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
 
 == Description ==
 
@@ -37,15 +37,22 @@ You can add your own custom fields, import images, you get free technical suppor
 3. Uploading a file
 4. Structure of the XML file
 5. The data to fill in
-6. Additional data
-7. Preview and import
+6. More data to fill in
+7. Advanced options
+8. Preview and import
 
 == Changelog ==
 
-= 1.0 =
+= 1.1.0 =
+* Added filtering
+
+= 1.0.0 =
 * Just released
 
 == Upgrade Notice ==
 
-= 1.0 =
-* Just released
+= 1.1.0 =
+* New feature added - filtering. Now you can choose which posts will be added, skipped, updated or deleted.
+
+= 1.0.0 =
+Just released

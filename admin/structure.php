@@ -8,7 +8,10 @@
         return htmlentities($str);
     }
 
+    global $suggest, $subtags;
+    $suggest = '';
     $subtags = array();
+
     function structure($xml){
         global $tags, $subtags, $suggest, $xml_content;
         
@@ -51,7 +54,7 @@
         
         foreach($tags as $tag=>$array){
             $count = count($array);
-            if($import_number==0 && $tag == gpost('main-tag'))$import_number = $count;
+            if($import_number==0 && $tag == $main_tag)$import_number = $count;
             echo '<h4 class="tag-content"><span>&lt;'.$tag.'&gt;</span>';
             echo '<input type="button" name="prev" value="&laquo;">';
             echo '<span>1</span>/<span>'.$count.'</span>';
@@ -69,24 +72,6 @@
             echo '</div>';
         }
 
-        /*
-        $tag = 'best-import';
-        echo '<h4 class="tag-content"><span>&lt;'.$tag.'&gt;</span>';
-        echo '<input type="button" name="prev" value="&laquo;">';
-        echo '<span>1</span>/<span>1</span>';
-        echo '<input type="button" name="next" value="&raquo;"></h4>';
-        echo '<div>';
-        echo '<table class="wp-list-table widefat fixed">';
-        foreach($additional_tags as $subtag=>$description){
-            $tag_function = "tag_$subtag";
-            $suggest .= "&lt;$tag/$subtag&gt;\r\n";
-            echo '<tr><td class="td-tag">&lt;'.$tag.'/'.$subtag.'&gt;</td><td>'.$description.' - '.$tag_function(0).'</td></tr>';
-        }
-        echo '</table>';
-        echo '</div>';
-        */
-
-        $suggest .= '&lt;media&gt;';
         file_put_contents($path.'/suggest.txt', $suggest);
         
     }else{

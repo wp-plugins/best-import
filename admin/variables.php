@@ -2,18 +2,6 @@
 
     namespace best_import_namespace;
 
-    // tags
-
-    global $tags;
-    $tags = array();
-
-    // numbers
-
-    global $max_preview, $import_number;
-
-    $max_preview = 1024;
-    $import_number = intval(gpost('import-number'));
-
     // xml
 
     global $xml, $xml_content;
@@ -26,26 +14,29 @@
         $xml_content = null;
     }
 
-    // suggest
+    // others
     
-    global $suggest;
-    $suggest = '';
+    global $tags, $max_preview, $import_number, $post_types, $post_type, $main_tag, $default_action;
 
-    // post data
+    $tags = array();
+    $max_preview = 1024;
+    $import_number = intval(gpost('import-number'));
+    $post_types = get_post_types();
+    $post_type = gpost('post-type', 'post');
+    $main_tag = gpost('main-tag', '');
+    $default_action = 'add';
 
-    global $names, $values, $types, $fields;
+    // default fields
 
-    $names = gpost('names', array());
-    $values = gpost('values', array());
-    $types = gpost('types', array());
-    $fields = count($names);
+    global $default_fields;
 
-    // exists
-    
-    global $exists;
-    $exists = gpost('exists', 'add');
+    $default_fields = array(
+        'title' => array('name'=>'title', 'value'=>gpost('title'), 'type'=>'string', 'label'=>'Title'),
+        'content' => array('name'=>'content', 'value'=>gpost('content'), 'type'=>'string', 'label'=>'Content'),
+        'date' => array('name'=>'date', 'value'=>gpost('date'), 'type'=>'date', 'label'=>'Date'),
+    );
 
-    // post taxonomies
+    // taxonomies
 
     global $taxonomies, $taxonomies_objects;
 
@@ -53,54 +44,48 @@
     $taxonomies_objects = get_taxonomies(array(), 'objects');   
 
     foreach($taxonomies_objects as $taxonomy)
-        if(in_array(gpost('type','post'), $taxonomy->object_type)){
+        if(in_array($post_type, $taxonomy->object_type)){
             $value = gpost('taxonomies', array());
             $value = isset($value[$taxonomy->name])?$value[$taxonomy->name]:'';
             $taxonomies[$taxonomy->name] = array(
                 'name' => $taxonomy->name,
-                'label' => $taxonomy->label,
-                'value' => $value
+                'value' => $value,
+                'type' => 'string',
+                'label' => $taxonomy->label
             );
         }
 
-    // post mapping
+    // mapping
 
-    global $mapping, $from, $to, $mapping_fields;
+    global $mapping;
+    $mapping = array();
 
-    $mapping = gpost('mapping', array());
-    $from = gpost('from', array());;
-    $to = gpost('to', array());
-    $mapping_fields = count($mapping);
+    $mapping_names = gpost('mapping_names', array());
+    $mapping_from = gpost('mapping_from', array());;
+    $mapping_to = gpost('mapping_to', array());
+    $mapping_count = count($mapping_names);
+    for($j=0; $j<$mapping_count; ++$j)
+        $mapping[] = array(
+            'name' => $mapping_names[$j],
+            'from' => $mapping_from[$j],
+            'to' => $mapping_to[$j]
+        );
 
+    // merge
+        
+    global $all_fields;
+
+    $all_fields = array_merge($default_fields, $taxonomies);
+        
     // input types
 
     global $input_types;
 
     $input_types = array(
-        '' => '-',
         'string' => 'String',
         'int' => 'Integer',
         'float' => 'Float',
         'date' => 'Date',
     );
-
-    // mapping types
-
-    global $mapping_types;
-
-    $mapping_types = array(
-        '' => '-',
-        'title' => 'Title',
-        'content' => 'Content',
-        'date' => 'Date',
-        'media' => 'Media'
-    );
-
-    foreach($taxonomies as $taxonomy)
-        $mapping_types[$taxonomy['name']] = $taxonomy['label'];
-
-    for($i=0; $i<$fields; ++$i)
-        if($types[$i])
-            $mapping_types[$names[$i]] = $names[$i];
         
 ?>

@@ -3,23 +3,28 @@
     namespace best_import_namespace;
 
     function apply_mapping($type, $value){
-        global $mapping, $from, $to, $mapping_fields;
-        for($i=0; $i<$mapping_fields; ++$i)
-            if($mapping[$i]==$type && $value==$from[$i])
-                return $to[$i];
+        global $mapping;
+        foreach($mapping as $map)
+            if($map['name']==$type && $map['from']==$value)
+                return $map['to'];
         return $value;
     }
 
-    function print_mapping($mapping, $from, $to){
-        global $mapping_types;
+    function print_mapping($name, $from, $to){
+        global $default_fields, $taxonomies;
         echo '<tr><td>';
-        echo '<select name="mapping[]">';
-        foreach($mapping_types as $k=>$v)echo '<option value="'.$k.'"'.($k==$mapping?' selected="selected"':'').'>'.$v.'</option>';
-        echo '</select>';
+            echo '<select name="mapping_names[]">';
+                echo '<optgroup label="Default fields">';
+                    foreach($default_fields as $field)echo '<option value="'.$field['name'].'"'.($field['name']==$name?' selected="selected"':'').'>'.$field['label'].'</option>';
+                echo '</optgroup>';
+                echo '<optgroup label="Taxonomies">';
+                    foreach($taxonomies as $taxonomy)echo '<option value="'.$taxonomy['name'].'"'.($taxonomy['name']==$name?' selected="selected"':'').'>'.$taxonomy['label'].'</option>';
+                echo '</optgroup>';
+            echo '</select>';
         echo '</td><td>';
-        echo '<input type="text" name="from[]" value="'.$from.'"> &raquo;';
-        echo '<input type="text" name="to[]" value="'.$to.'"> ';
-        echo '<input type="button" name="removeField" value="&times;">';
+            echo '<input type="text" name="mapping_from[]" value="'.$from.'"> &raquo;';
+            echo '<input type="text" name="mapping_to[]" value="'.$to.'"> ';
+            echo '<input type="button" name="removeField" value="&times;">';
         echo '</td></tr>';
     }
 
@@ -27,9 +32,9 @@
         echo '<h3>Mapping</h3>';
         echo '<h4>Add mapping to your data if necessarily.</h4>';
         echo '<table class="form-table">';
-        for($i=0; $i<$mapping_fields; ++$i)if($mapping[$i])print_mapping($mapping[$i], $from[$i], $to[$i]);
+        foreach($mapping as $map)print_mapping($map['name'], $map['from'], $map['to']);
         print_mapping('', 'from', 'to');
-        echo '<tr><td><label for="bi-add-2">Add mapping</label></td><td><input type="button" value="Add" id="bi-add-2"></td></tr>';
+        echo '<tr><td><label for="bi-add-3">Add mapping</label></td><td><input type="button" value="Add" id="bi-add-3"></td></tr>';
         echo '</table>';
     }
 

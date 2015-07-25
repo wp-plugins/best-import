@@ -8,6 +8,7 @@
     <a href="#upload" class="nav-tab">Upload</a>
     <a href="#structure" class="nav-tab">Structure</a>
     <a href="#data" class="nav-tab">Data</a>
+    <a href="#advanced" class="nav-tab">Advanced</a>
     <a href="#import" class="nav-tab">Import</a>
 </h2>
 
@@ -54,9 +55,13 @@
             include $path.'/data.php';
             include $path.'/taxonomies.php';
             include $path.'/media.php';
-            include $path.'/custom.php';
-            include $path.'/mapping.php';
             include $path.'/templates.php';
+        echo '</div>';
+
+        echo '<div id="tab-advanced">';
+            include $path.'/custom.php';
+            include $path.'/filtering.php';
+            include $path.'/mapping.php';
         echo '</div>';
 
         echo '<div id="tab-import">';

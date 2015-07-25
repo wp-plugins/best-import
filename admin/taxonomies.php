@@ -4,7 +4,7 @@
 
     if($xml){ 
         echo '<h3>Taxonomies</h3>';
-        if(count($taxonomies)==0)echo "<h4>Taxonomies for type '".gpost('type')."' not found.</h4>";
+        if(count($taxonomies)==0)echo "<h4>Taxonomies for type '".$post_type."' not found.</h4>";
         else{
             echo '<h4>Define what taxonomies you want to set.</h4>';
             echo '<table class="form-table">';

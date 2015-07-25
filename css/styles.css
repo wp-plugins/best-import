@@ -74,6 +74,12 @@
 
     #bi h3{
         margin-top: 40px;   
+        color: #000;
+        cursor: pointer;
+    }
+
+    #bi h3:hover{
+        color: #28b;   
     }
 
     #bi p{
@@ -123,7 +129,7 @@
     }
 
     #bi-menu .nav-tab{
-        width: 150px;
+        width: 130px;
         text-align: center;
     }
 

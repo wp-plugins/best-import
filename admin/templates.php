@@ -21,7 +21,7 @@
             echo '<td>';
                 echo '<select name="load-template" vid="bi-load-template">';
                 $templates = glob($path.'/*.json');
-                if(count($templates)==0)echo '<option value="">-</option>';
+                if(count($templates)==0)echo '<option value="">...</option>';
                 else foreach($templates as $template){
                     $name = basename($template, '.json');
                     echo '<option value="'.$name.'">'.$name.'</option>';

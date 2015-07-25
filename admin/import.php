@@ -2,21 +2,20 @@
 
     namespace best_import_namespace;
 
-    function check_attribute($node, $name, $operator, $value){
-        $attr = $node->attributes()->$name;
-        return $operator=='' && $attr ||
-            $operator=='=' && $attr==$value ||
-            $operator=='!=' && $attr!=$value ||
-            $operator=='^=' && substr($attr,0,strlen($value))==$value ||
-            $operator=='$=' && substr($attr,-strlen($value))==$value ||
-            $operator=='*=' && strpos($attr,$value)!==false ||
-            $operator=='<' && $attr<$value ||
-            $operator=='<=' && $attr<=$value ||
-            $operator=='>' && $attr>$value ||
-            $operator=='>=' && $attr>=$value;
+    function check_condition($a, $operator, $b){
+        return $operator=='' && $a ||
+            $operator=='=' && $a==$b ||
+            $operator=='!=' && $a!=$b ||
+            $operator=='^=' && substr($a,0,strlen($b))==$b ||
+            $operator=='$=' && substr($a,-strlen($b))==$b ||
+            $operator=='*=' && ($b=='' || strpos($a,$b)!==false) ||
+            $operator=='<' && $a<$b ||
+            $operator=='<=' && $a<=$b ||
+            $operator=='>' && $a>$b ||
+            $operator=='>=' && $a>=$b;
     }
 
-    function parse_tag($str, $i){
+    function parse_tag($str, $type, $i){
         global $tags;
 
         preg_match_all("/\<\w+\/\w+\>(\s*\[[^\]]+?\])*/", $str, $strtags);
@@ -29,18 +28,20 @@
             $subtag = $tag_subtag[2][0];
             
             preg_match_all("/\[(\w+)\s*(?:(\=|\!\=|\^\=|\$\=|\*\=|\<|\>|\<\=|\>\=)\s*(\"[^\"]*\"|[^\]]*))?\]/", $strtag, $attributes);
-            list($attributes, $name, $operator, $value) = $attributes;
+            list($attributes, $names, $operators, $values) = $attributes;
 
             $data = '';
             $nodes = $tags[$tag][$i]->$subtag;
 
             foreach($nodes as $node){
                 $add = true;
-                foreach($attributes as $n=>$attr)
-                    if(!check_attribute($node, $name[$n], $operator[$n], $value[$n])){
+                foreach($attributes as $n=>$attr){
+                    $attr = $names[$n];
+                    if(!check_condition($node->attributes()->$attr, $operators[$n], $values[$n])){
                         $add = false;
                         break;
                     }
+                }
                 if($add)$data .= get_text($node)."\n";
             }
             
@@ -48,91 +49,85 @@
             $str = str_replace($strtag, $data, $str);
         }
         
-        return $str;
+        if($type=='int'){
+            return intval($str);
+        }elseif($type=='float'){
+            return floatval(str_replace(',', '.', $str));
+        }elseif($type=='date'){
+            $str = strtotime($str);
+            return date('Y-m-d H:i:s', $str==false?time():$str);
+        }elseif($type=='array'){
+            return $str==''?array():explode("\n", $str);
+        }else{
+            return $str;
+        }
+        
     };
 
-    function parse_string_tag($value, $i){
-        $value = parse_tag($value, $i);
-        return $value;
+    function parse_field($field, $i){
+        return apply_mapping($field['name'], parse_tag($field['value'], $field['type'], $i));
     }
 
-    function parse_int_tag($value, $i){
-        $value = parse_tag($value, $i);
-        return intval($value);
-    }
-
-    function parse_float_tag($value, $i){
-        $value = parse_tag($value, $i);
-        return floatval(str_replace(',', '.', $value));
-    }
-
-    function parse_date_tag($value, $i){
-        $value = parse_tag($value, $i);
-        $value = strtotime(parse_tag($value, $i));
-        return date('Y-m-d H:i:s', $value==false?time():$value);
-    }
-
-    function parse_array_tag($value, $i){
-        $value = parse_tag($value, $i);
-        return $value==''?array():explode("\n", $value);
+    function find_post_id($name, $value){
+        global $wpdb, $default_fields, $post_type;
+        if(isset($default_fields[$name])){
+            $post = $wpdb->get_row("SELECT ID FROM $wpdb->posts WHERE post_$name='$value' AND post_type='$post_type' AND post_status='publish'");
+            return $post ? $post->ID : NULL;
+        }else{
+            $post = $wpdb->get_row("SELECT ID FROM $wpdb->postmeta LEFT JOIN $wpdb->posts ON post_id=ID WHERE meta_key='$name' AND meta_value='$value' AND post_type='$post_type' AND post_status='publish'");
+            return $post ? $post->ID : NULL;
+        }
     }
 
     echo '<h3>Import</h3>';
     if($xml){
         
-        $type = gpost('type');
         $wp_error = '';
+        $added = 0;
+        $updated = 0;
+        $deleted = 0;
 
         if(gpost('import')=='Import' || isset($_GET['import'])){
-            
+                              
             for($i=0; $i<$import_number; ++$i){
                 
-                $post = NULL;
-                $title = apply_mapping('title', parse_string_tag(gpost('title'), $i));
-                $oldpost = get_page_by_title($title, OBJECT, $type);
-                if($oldpost && $oldpost->post_status=='trash')$oldpost = NULL;
-
-                if($oldpost){
-                    if($exists=='update')$post = array('ID' => $oldpost->ID, 'post_status' => 'publish');
-                    else if($exists=='skip')continue;
-                }
+                // action
+                $post_id = NULL;
+                $action = $default_action;
+                            
+                // post
+                $post = array('ID' => $post_id, 'post_status' => 'publish');
                 
-                if(!$post)$post = array('post_status' => 'publish');
-
-                // type
-                $post['post_type'] = $type;
-                //if($type=='product')wp_set_object_terms($post_id, 'simple', 'product_type');
-
-                // title
-                $post['post_title'] = $title;
-
-                // name
+                // default fields
+                $post['post_type'] = $post_type;
+                $post['post_title'] = parse_field($default_fields['title'], $i);
                 $post['post_name'] = sanitize_title($post['post_title']);
+                $post['post_content'] =  parse_field($default_fields['content'], $i);
+                $post['post_date'] =  parse_field($default_fields['date'], $i);
 
-                // content
-                $post['post_content'] = apply_mapping('content', parse_string_tag(gpost('content'), $i));
-
-                // date
-                $post['post_date'] = apply_mapping('date', parse_date_tag(gpost('date'), $i));
-
-                // insert post
-                if(isset($post['ID']))$post_id = wp_update_post($post, $wp_error);
-                else $post_id = wp_insert_post($post, $wp_error);
+                // insert/update post
+                if($post_id){
+                    $post_id = wp_update_post($post, $wp_error);
+                    $updated++;
+                }else{
+                    $post_id = wp_insert_post($post, $wp_error);
+                    $added++;
+                }
 
                 // taxonomies
                 foreach($taxonomies as $taxonomy){
-                    $categories = parse_array_tag($taxonomy['value'], $i);
+                    $categories = parse_tag($taxonomy['value'], 'array', $i);
                     foreach($categories as $n=>$category)$categories[$n] = apply_mapping($taxonomy['name'], $category);
                     wp_set_object_terms($post_id, $categories, $taxonomy['name']);
                 }
                 
             }
             
-            echo '<h4>'.$import_number.' posts has been successfully imported.</h4>';
+            echo '<h4>'.$added.' posts added | '.$updated.' posts updated | '.$deleted.' posts deleted</h4>';
             echo '<label for="bi-import-number">How many?</label> <input type="text" value="'.$import_number.'" name="import-number" id="bi-import-number"> ';
             echo '<input type="submit" name="preview" value="Update Preview"><br><br>';
             
-        }else if(gpost('type')){
+        }else if(gpost('preview')){
             
             echo '<h4>The table below contains the data to import.</h4>';
             echo '<label for="bi-import-number">How many?</label> <input type="text" value="'.$import_number.'" name="import-number" id="bi-import-number"> ';

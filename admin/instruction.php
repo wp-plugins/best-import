@@ -67,12 +67,31 @@
         If the data contains links to images and they need to be uploaded on the server, select second option.
     </p>
 
+    <h4>Templates</h4>
+    <p>
+        If you have filled in the form and want to use it again later, the templates will help you.
+        You can save/load/remove all the information you provided here.
+        Additionally, you will get the link to the template and will be able to add it to your CRON to schedule importing the data.
+    </p>
+
+<h3>4. Refine the data</h3>
+    <p>
+        It's not obligatory to even look here, but sometimes more advanced options are necessary to do some more complicated tasks.
+    </p>
+
     <h4>Custom fields (<a href="http://zefirstudio.pl/wp-best-import/">pro only</a>)</h4>
     <p>
         The title, the content and the date is usually not sufficient.
         You often need to provide additional information, for example. price and weight for products.
         Click on the Decect button to find all custom fields that are available in your theme.
         You can also add your own fields and it will be saved as post meta data.
+    </p>
+
+    <h4>Filtering (<a href="http://zefirstudio.pl/wp-best-import/">pro only</a>)</h4>
+    <p>
+        You may want to filter the data.
+        For example, if you wish to add only products that are cheaper than 100$, set the appropriate filter.
+        Moreover, you can set when the post is added, skipped, updated or deleted.
     </p>
 
     <h4>Mapping</h4>
@@ -82,14 +101,8 @@
         If so, just add mapping for Categories from one name to another.
     </p>
 
-    <h4>Templates</h4>
-    <p>
-        If you have filled in the form and want to use it again later, the templates will help you.
-        You can save/load/remove all the information you provided here.
-        Additionally, you will get the link to the template and will be able to add it to your CRON to schedule importing the data.
-    </p>
 
-<h3>4. Import the data</h3>
+<h3>5. Import the data</h3>
     <p>
         When you have finished previous steps, now you can see the results.
         You don't have to import all the data, you can specify how many rows you want to add.
