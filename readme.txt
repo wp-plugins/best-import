@@ -14,6 +14,23 @@ Here is a short description of the plugin.  This should be no more than 150 char
 
 Best Import is a simple tool created to save your time. It makes your complicated import tasks fast and simple. It is both easy to use and advanced. It can import any kind of XML, CSV or ZIP file. You can use it for building a real estate portal, commercial store and everywhere you have to migrate the data from a legacy CMS to WordPress.
 
+If you need support or want to use custom fields/media/filtering, upgrade to Best Import Pro today!
+
+Full list of features Best Import Pro:
+
+-	import XML Data to wordpress,
+-	import CSV Data to wordpress (same operation like XML, our product can change on the fly),
+-	import data to cu¬stom fields,
+-	import images and insert them to your post,
+-	taxonomies are automatically detected depending on what type of the post you selected,
+-	sometimes you need to translate some values into the others. Just add mapping for categories from one name to another,
+-	templates, you can save/load/remove all the information,
+-	you can choose which posts will be added, skipped, updated or deleted,
+-	you will get every new update for free,
+-	tech¬ni¬cal sup¬port via e-mail,
+-	if the plu¬gin does not meet your expec¬ta¬tions you have 30 day mo¬ney back guarantee.
+
+
 == Installation ==
 
 1. Upload `best-import` directory to the `/wp-content/plugins/`
