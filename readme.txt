@@ -20,15 +20,15 @@ Full list of features Best Import Pro:
 
 -	import XML Data to wordpress,
 -	import CSV Data to wordpress (same operation like XML, our product can change on the fly),
--	import data to cu¬stom fields,
+-	import data to custom fields,
 -	import images and insert them to your post,
 -	taxonomies are automatically detected depending on what type of the post you selected,
--	sometimes you need to translate some values into the others. Just add mapping for categories from one name to another,
+-	sometimes you need to translate some values into the other, just add mapping for categories from one name to another,
 -	templates, you can save/load/remove all the information,
 -	you can choose which posts will be added, skipped, updated or deleted,
 -	you will get every new update for free,
--	tech¬ni¬cal sup¬port via e-mail,
--	if the plu¬gin does not meet your expec¬ta¬tions you have 30 day mo¬ney back guarantee.
+-	technical support via e-mail,
+-	if the plugin does not meet your expectations you have 30 day money back guarantee.
 
 
 == Installation ==
