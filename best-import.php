@@ -3,7 +3,7 @@
     * Plugin Name: Best Import
     * Plugin URI: http://zefirstudio.pl/wp-best-import/
     * Description: This plugin allows to import data from XML/CSV/ZIP files.
-    * Version: 1.0.0
+    * Version: 1.1.0
     * Author: Zefir Studio
     * Author URI: http://www.zefirstudio.pl/
     * License: GPL2
