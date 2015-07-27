@@ -14,7 +14,7 @@ Import data from XML, CSV and ZIP files as easy and fast as never before.
 
 = Best Import =
 Best Import is a simple tool created to save your time. It makes your complicated import tasks fast and simple. It is both easy to use and advanced. It can import any kind of XML, CSV or ZIP file. You can use it for building a real estate portal, commercial store and everywhere you have to migrate the data from a legacy CMS to WordPress.
-Best Import has lots of useless features:
+Best Import has lots of useful features:
 
 -	import data from XML file to wordpress
 -	convert CSV file to XML on the fly
