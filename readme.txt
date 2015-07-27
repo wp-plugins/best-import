@@ -15,28 +15,30 @@ Import data from XML, CSV and ZIP files as easy and fast as never before.
 = Best Import =
 Best Import is a simple tool created to save your time. It makes your complicated import tasks fast and simple. It is both easy to use and advanced. It can import any kind of XML, CSV or ZIP file. You can use it for building a real estate portal, commercial store and everywhere you have to migrate the data from a legacy CMS to WordPress.
 Best Import has lots of useless features:
-* import data from XML file to wordpress,
-* convert CSV file to XML on the fly,
-* clear preview of the data,
-* choose which tag is responsible for title/content/date/etc,
-* filter tags by their attributes,
-* detect taxonomies depending on what type of the post you selected,
-* save and load templates,
-* translate words into the others using mapping,
-* set how many posts you want to add,
-* see the final preview of the data.
+
+-	import data from XML file to wordpress
+-	convert CSV file to XML on the fly
+-	clear preview of the data
+-	choose which tag is responsible for title/content/date/etc
+-	filter tags by their attributes
+-	detect taxonomies depending on what type of the post you selected
+-	save and load templates
+-	translate words into the others using mapping
+-	set how many posts you want to add
+-	see the final preview of the data
 
 = Best Import Pro =
 DISCOUNT UNTIL JULY 28!
 [Upgrade to Best Import Pro](http://www.zefirstudio.pl/wp-best-import/) and enjoy additional features:
-* add your own custom fields or detect them automatically
-* import images from the ZIP file,
-* insert images directly into the posts,
-* filter the data you want to import,
-* choose which posts will be added, skipped, updated or deleted,
-* get every new update for free,
-* technical support via e-mail,
-* if the plugin does not meet your expectations you have 30 day money back guarantee.
+
+-	add your own custom fields or detect them automatically
+-	import images from the ZIP file
+-	insert images directly into the posts
+-	filter the data you want to import
+-	choose which posts will be added, skipped, updated or deleted
+-	get every new update for free
+-	technical support via e-mail
+-	if the plugin does not meet your expectations you have 30 day money back guarantee
 
 == Installation ==
 
