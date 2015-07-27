@@ -5,7 +5,7 @@
     function preview($str){
         global $max_preview;
         if(strlen($str)>$max_preview)$str = substr($str, 0, $max_preview).'...';
-        return htmlentities($str);
+        return htmlentities($str, ENT_COMPAT|ENT_HTML401, "UTF-8");
     }
 
     global $suggest, $subtags;
@@ -72,6 +72,7 @@
             echo '</div>';
         }
 
+        $suggest .= '&lt;media&gt;';
         file_put_contents($path.'/suggest.txt', $suggest);
         
     }else{
