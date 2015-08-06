@@ -28,7 +28,7 @@ Best Import has lots of useful features:
 -	see the final preview of the data
 
 = Best Import Pro =
-DISCOUNT UNTIL AUGUST 5!
+DISCOUNT UNTIL AUGUST 12!
 [Upgrade to Best Import Pro](http://www.zefirstudio.pl/wp-best-import/) and enjoy additional features:
 
 -	add your own custom fields or detect them automatically
