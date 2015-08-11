@@ -1,7 +1,7 @@
 === Best Import ===
 Contributors: zefir-studio
 Donate link: http://zefirstudio.pl/wp-best-import/
-Tags: import, importing, importer, migrate, migrating, xml, csv, zip, wordpress xml import, wordpress csv import, xml, csv, import, migrate, import xml to wordpress, import csv to wordpress, advanced xml import, advanced csv import, bulk csv import, bulk xml import, bulk data import, xml to custom post type, csv to custom post type, woocommerce csv import, woocommerce xml import, real este import xml, csv import, import csv, xml import, import xml, csv importer
+Tags: import, importing, importer, migrate, migrating, xml, csv, zip, wordpress xml import, wordpress csv import, xml, csv, import, migrate, import xml to wordpress, import csv to wordpress, advanced xml import, advanced csv import, bulk csv import, bulk xml import, bulk data import, xml to custom post type, csv to custom post type, woocommerce csv import, woocommerce xml import, real este import xml, csv import, import csv, xml import, import xml, csv importer, import posts, products, sales offer, estates, estate portal
 Requires at least: 3.0.1
 Tested up to: 4.2.2
 Stable tag: 1.1.0
@@ -26,6 +26,8 @@ Best Import has lots of useful features:
 -	translate words into the others using mapping
 -	set how many posts you want to add
 -	see the final preview of the data
+
+[youtube https://www.youtube.com/watch?v=-h-A76lTtY4]
 
 = Best Import Pro =
 DISCOUNT UNTIL AUGUST 12!
