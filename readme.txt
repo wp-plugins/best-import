@@ -4,7 +4,7 @@ Donate link: http://zefirstudio.pl/wp-best-import/
 Tags: import, importing, importer, migrate, migrating, xml, csv, zip, wordpress xml import, wordpress csv import, xml, csv, import, migrate, import xml to wordpress, import csv to wordpress, advanced xml import, advanced csv import, bulk csv import, bulk xml import, bulk data import, xml to custom post type, csv to custom post type, woocommerce csv import, woocommerce xml import, real este import xml, csv import, import csv, xml import, import xml, csv importer, import posts, products, sales offer, estates, estate portal
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,9 @@ You can add your own custom fields, import images, you get free technical suppor
 
 == Changelog ==
 
+= 1.1.1 =
+* Bug fixes
+
 = 1.1.0 =
 * Added filtering
 
@@ -78,6 +81,9 @@ You can add your own custom fields, import images, you get free technical suppor
 * Just released
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+* Bug fixes
 
 = 1.1.0 =
 * New feature added - filtering. Now you can choose which posts will be added, skipped, updated or deleted.

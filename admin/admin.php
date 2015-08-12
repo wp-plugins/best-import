@@ -16,6 +16,9 @@
 
     global $path;
     $path = pathinfo(__FILE__, PATHINFO_DIRNAME);
+	$dir = '/'.str_replace('\\', '/', substr($path, strpos($path, 'wp-content')));
+
+	echo '<script type="text/javascript">dir = "'.$dir.'";</script>';
 
     global $zip_file, $xml_file;
 

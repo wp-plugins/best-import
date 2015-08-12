@@ -1,7 +1,5 @@
 if(window.location.href.indexOf('best_import')!=-1)(function($){
-    
-    dir = '/wp-content/plugins/best-import/admin';
-        
+
     function expandH3(){
         $('*[id^="tab-"] h3').click(function(e){
             $(this).nextUntil('h3').toggle();
